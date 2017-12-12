@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 
 import styles from './styles';
 
-export default class ProductList extends Component {
+export default class Detail extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>ProductList</Text>
+        <Text>Detail</Text>
       </View>
     );
   }

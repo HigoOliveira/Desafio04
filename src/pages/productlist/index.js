@@ -6,15 +6,17 @@ import {
   Text,
 } from 'react-native';
 
+import List from 'components/ProductList';
+
 import PropTypes from 'prop-types';
 
 import styles from './styles';
 
-export default class Detail extends Component {
+export default class ProductList extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Detail</Text>
+        <List />
       </View>
     );
   }
