@@ -1,23 +1,24 @@
 /* @flow */
-
+/* Core */
 import React, { Component } from 'react';
 import {
   View,
-  Text,
+  // Text,
 } from 'react-native';
+// import PropTypes from 'prop-types';
 
+/* Components */
 import List from 'components/ProductList';
+import CategoryList from 'components/CategoryList';
 
-import PropTypes from 'prop-types';
-
+/* Presentational */
 import styles from './styles';
 
-export default class ProductList extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <List />
-      </View>
-    );
-  }
-}
+const ProductList = () => (
+  <View style={styles.container}>
+    <CategoryList />
+    <List />
+  </View>
+);
+
+export default ProductList;

@@ -26,7 +26,7 @@ const Routes = TabNavigator({
   ProductList: { screen: ProductListRoutes },
   Cart: { screen: Cart },
 }, {
-  initialRouteName: 'Cart',
+  initialRouteName: 'ProductList',
   swipeEnabled: false,
   animationEnabled: false,
   lazy: true,
