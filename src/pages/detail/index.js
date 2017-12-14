@@ -1,13 +1,6 @@
 /* @flow */
 /* Core */
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  BackHandler,
-  TouchableOpacity,
-} from 'react-native';
 import PropTypes from 'prop-types';
 
 /* Redux */
@@ -16,7 +9,16 @@ import { NavigationActions } from 'react-navigation';
 
 /* Components */
 import ProductItem from 'components/ProductList/components/ProductItem';
+import Header from 'components/Header';
 
+/* Presentational */
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  BackHandler,
+} from 'react-native';
 import styles from './styles';
 
 class Detail extends Component {
@@ -48,6 +50,7 @@ class Detail extends Component {
     const { product } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
+        <Header title="Detalhe do produto" backEnabled />
         <View style={styles.containerMain}>
           <Image
             source={{

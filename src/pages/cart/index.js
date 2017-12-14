@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 
 /* Components */
 import CartList from 'components/CartList';
+import Header from 'components/Header';
 
 /* Presentational */
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -25,6 +26,7 @@ export default class Cart extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Header title="Carrinho" />
         <CartList />
       </View>
     );

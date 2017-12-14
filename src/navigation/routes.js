@@ -18,7 +18,7 @@ const ProductListRoutes = StackNavigator({
     tabBarIcon: ({ tintColor }) => (
       <Icon name="home" size={20} color={tintColor} />
     ),
-  }
+  },
 });
 
 

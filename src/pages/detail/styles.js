@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: metrics.radius,
     padding: metrics.padding,
+    marginTop: metrics.marginTopPage,
+    marginHorizontal: metrics.marginHorizontalPage,
+    borderRadius: metrics.radius,
   },
   containerContent: {
     flexDirection: 'row',

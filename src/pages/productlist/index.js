@@ -10,12 +10,14 @@ import {
 /* Components */
 import List from 'components/ProductList';
 import CategoryList from 'components/CategoryList';
+import Header from 'components/Header';
 
 /* Presentational */
 import styles from './styles';
 
 const ProductList = () => (
   <View style={styles.container}>
+    <Header title="GoCommerce" />
     <CategoryList />
     <List />
   </View>
