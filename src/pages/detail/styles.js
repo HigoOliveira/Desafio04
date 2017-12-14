@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   ...general,
   image: {
     height: 285,
+    resizeMode: 'contain',
   },
   containerMain: {
     backgroundColor: colors.white,

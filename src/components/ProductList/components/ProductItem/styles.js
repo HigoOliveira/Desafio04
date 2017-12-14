@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   },
   image: {
     height: metrics.image,
+    resizeMode: 'contain',
   },
   name: {
     fontSize: fonts.regular,
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   brand: {
-    fontSize: fonts.tint,
+    fontSize: fonts.tiny,
     color: colors.grey,
   },
   price: {

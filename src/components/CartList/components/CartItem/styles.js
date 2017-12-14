@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   brand: {
-    fontSize: fonts.tint,
+    fontSize: fonts.tiny,
     color: colors.grey,
   },
   price: {
@@ -30,12 +30,13 @@ const styles = StyleSheet.create({
   image: {
     height: 60,
     width: 60,
+    resizeMode: 'contain',
   },
   input: {
     borderWidth: 1,
     borderColor: colors.grey,
     borderRadius: metrics.radius,
-    fontSize: fonts.tint,
+    fontSize: fonts.tiny,
     width: 35,
     height: 20,
     paddingVertical: 0,

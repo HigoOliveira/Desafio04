@@ -4,5 +4,5 @@ export default {
   big: 16,
   regular: 14,
   small: 12,
-  tint: 11,
+  tiny: 11,
 };
