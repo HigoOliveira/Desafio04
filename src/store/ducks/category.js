@@ -7,6 +7,7 @@ const { Types, Creators } = createActions({
   categorySuccess: ['data'],
   categoryFailure: null,
   categorySelect: ['category'],
+  categoryAddProducts: ['category', 'products'],
 });
 
 export { Types };
@@ -36,6 +37,14 @@ export const failure = () => ({
 
 export const select = (state, action) => ({ ...state, selected: action.category });
 
+export const addProducts = (state, action) => ({
+  ...state,
+  data: state.data.map(item =>
+    (item.id === action.category.id
+      ? { ...item, products: action.products }
+      : item)),
+});
+
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -43,4 +52,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CATEGORY_SUCCESS]: success,
   [Types.CATEGORY_FAILURE]: failure,
   [Types.CATEGORY_SELECT]: select,
+  [Types.CATEGORY_ADD_PRODUCTS]: addProducts,
 });

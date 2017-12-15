@@ -22,7 +22,7 @@ export const INITIAL_STATE = {
 export const request = state => ({ ...state, loading: true });
 
 export const success = (state, action) => ({
-  data: [...state.data, action.data],
+  data: action.data,
   loading: false,
   error: false,
 });

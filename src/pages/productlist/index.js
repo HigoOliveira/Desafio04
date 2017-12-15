@@ -24,8 +24,7 @@ class ProductList extends Component {
     this.props.categoryRequest();
   }
   render() {
-    const { category } = this.props;
-    console.tron.log(category);
+    const { category, products } = this.props;
     return (
       <View style={styles.container}>
         <Header title="GoCommerce" />
@@ -34,7 +33,10 @@ class ProductList extends Component {
           loading={category.loading}
           selected={category.selected}
         />
-        <List />
+        <List
+          products={products.data}
+          loading={products.loading}
+        />
       </View>
     );
   }
@@ -42,6 +44,7 @@ class ProductList extends Component {
 
 const mapStateToProps = state => ({
   category: state.category,
+  products: state.products,
 });
 
 const mapDispatchToProps = dispatch => ({
