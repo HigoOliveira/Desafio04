@@ -7,6 +7,7 @@ export function* getCategories() {
 
   if (response.ok) {
     yield put(ActionCreators.categorySuccess(response.data));
+    yield put(ActionCreators.categorySelect(response.data[0]));
   } else {
     yield put(ActionCreators.categoryFailure());
   }

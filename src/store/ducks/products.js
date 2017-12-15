@@ -3,10 +3,9 @@ import { createReducer, createActions } from 'reduxsauce';
 /* Types & Action Creators */
 
 const { Types, Creators } = createActions({
-  categoryRequest: null,
-  categorySuccess: ['data'],
-  categoryFailure: null,
-  categorySelect: ['category'],
+  productsRequest: ['category'],
+  productsSuccess: ['data'],
+  productsFailure: null,
 });
 
 export { Types };
@@ -18,13 +17,12 @@ export const INITIAL_STATE = {
   data: [],
   loading: false,
   error: false,
-  selected: null,
 };
 
 export const request = state => ({ ...state, loading: true });
 
 export const success = (state, action) => ({
-  data: action.data,
+  data: [...state.data, action.data],
   loading: false,
   error: false,
 });
@@ -34,13 +32,10 @@ export const failure = () => ({
   error: true,
 });
 
-export const select = (state, action) => ({ ...state, selected: action.category });
-
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.CATEGORY_REQUEST]: request,
-  [Types.CATEGORY_SUCCESS]: success,
-  [Types.CATEGORY_FAILURE]: failure,
-  [Types.CATEGORY_SELECT]: select,
+  [Types.PRODUCTS_REQUEST]: request,
+  [Types.PRODUCTS_SUCCESS]: success,
+  [Types.PRODUCTS_FAILURE]: failure,
 });
