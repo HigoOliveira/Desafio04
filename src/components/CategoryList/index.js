@@ -2,6 +2,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+/* Redux */
+import { connect } from 'react-redux';
+import CategoryActions from 'store/ducks/category';
+
 /* Presentational */
 import { ScrollView, View, ActivityIndicator } from 'react-native';
 import styles from './styles';
@@ -9,20 +13,18 @@ import styles from './styles';
 /* Components */
 import CategoryItem from './components/CategoryItem';
 
-export default class List extends Component {
+class List extends Component {
   static propTypes = {
     categories: PropTypes.arrayOf(CategoryItem.propTypes.category),
     loading: PropTypes.bool,
+    selected: CategoryItem.propTypes.selected,
+    categorySelect: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     categories: [],
     loading: false,
-  }
-  handleSelectCategory = (selectedCategory) => {
-    const items = this.state.items.map(category =>
-      ({ ...category, selected: selectedCategory.id === category.id }));
-    this.setState({ items });
+    selected: null,
   }
 
   renderCategories() {
@@ -36,8 +38,8 @@ export default class List extends Component {
           <CategoryItem
             key={category.id}
             category={category}
-            selected={category.selected}
-            onPress={this.handleSelectCategory}
+            selected={this.props.selected}
+            onPress={this.props.categorySelect}
           />))}
       </ScrollView>
     );
@@ -53,3 +55,9 @@ export default class List extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  categorySelect: category => dispatch(CategoryActions.categorySelect(category)),
+});
+
+export default connect(null, mapDispatchToProps)(List);

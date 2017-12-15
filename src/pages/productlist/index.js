@@ -25,12 +25,14 @@ class ProductList extends Component {
   }
   render() {
     const { category } = this.props;
+    console.tron.log(category);
     return (
       <View style={styles.container}>
         <Header title="GoCommerce" />
         <CategoryList
           categories={category.data}
           loading={category.loading}
+          selected={category.selected}
         />
         <List />
       </View>

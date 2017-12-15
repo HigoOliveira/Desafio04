@@ -10,10 +10,16 @@ import styles from './styles';
 const CartItem = ({ category, selected, onPress }) => (
   <TouchableOpacity
     activateOpacity={0.9}
-    style={[styles.container, selected ? styles.selected : null]}
+    style={[styles.container, selected && selected.id === category.id ? styles.selected : null]}
     onPress={() => { onPress(category); }}
   >
-    <Text style={[styles.title, selected ? styles.selectedTitle : null]}>{category.title}</Text>
+    <Text
+      style={[styles.title,
+        selected && selected.id === category.id ? styles.selectedTitle : null,
+      ]}
+    >
+      {category.title}
+    </Text>
   </TouchableOpacity>
 );
 
@@ -22,12 +28,15 @@ CartItem.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
   }).isRequired,
-  selected: PropTypes.bool,
+  selected: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+  }),
   onPress: PropTypes.func.isRequired,
 };
 
 CartItem.defaultProps = {
-  selected: false,
+  selected: null,
 };
 
 export default CartItem;

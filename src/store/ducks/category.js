@@ -6,6 +6,7 @@ const { Types, Creators } = createActions({
   categoryRequest: null,
   categorySuccess: ['data'],
   categoryFailure: null,
+  categorySelect: ['category'],
 });
 
 export { Types };
@@ -17,6 +18,7 @@ export const INITIAL_STATE = {
   data: [],
   loading: false,
   error: false,
+  selected: null,
 };
 
 export const request = state => ({ ...state, loading: true });
@@ -25,6 +27,7 @@ export const success = (state, action) => ({
   data: action.data,
   loading: false,
   error: false,
+  selected: action.data[0],
 });
 
 export const failure = () => ({
@@ -32,10 +35,13 @@ export const failure = () => ({
   error: true,
 });
 
+export const select = (state, action) => ({ ...state, selected: action.category });
+
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CATEGORY_REQUEST]: request,
   [Types.CATEGORY_SUCCESS]: success,
   [Types.CATEGORY_FAILURE]: failure,
+  [Types.CATEGORY_SELECT]: select,
 });
