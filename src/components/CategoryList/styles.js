@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     height: 44,
     backgroundColor: colors.primary,
+    justifyContent: 'center',
   },
   contentContainer: {
     flexDirection: 'row',

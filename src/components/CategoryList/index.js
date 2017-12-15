@@ -1,61 +1,54 @@
+/* Core */
 import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
+import PropTypes from 'prop-types';
 
-import CategoryItem from './components/CategoryItem';
-
+/* Presentational */
+import { ScrollView, View, ActivityIndicator } from 'react-native';
 import styles from './styles';
 
-export default class List extends Component {
-  state = {
-    items: [{
-      id: 1,
-      title: 'Camisetas',
-    },
-    {
-      id: 2,
-      title: 'Camisas',
-      selected: true,
-    },
-    {
-      id: 3,
-      title: 'Calças',
-    },
-    {
-      id: 4,
-      title: 'Blusas',
-    },
-    {
-      id: 5,
-      title: 'Bonés',
-    },
-    {
-      id: 6,
-      title: 'Casacos',
-    }],
-  }
+/* Components */
+import CategoryItem from './components/CategoryItem';
 
+export default class List extends Component {
+  static propTypes = {
+    categories: PropTypes.arrayOf(CategoryItem.propTypes.category),
+    loading: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    categories: [],
+    loading: false,
+  }
   handleSelectCategory = (selectedCategory) => {
     const items = this.state.items.map(category =>
       ({ ...category, selected: selectedCategory.id === category.id }));
     this.setState({ items });
   }
 
+  renderCategories() {
+    return (
+      <ScrollView
+        contentContainerStyle={styles.contentContainer}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      >
+        {this.props.categories.map(category => (
+          <CategoryItem
+            key={category.id}
+            category={category}
+            selected={category.selected}
+            onPress={this.handleSelectCategory}
+          />))}
+      </ScrollView>
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        >
-          {this.state.items.map(item => (
-            <CategoryItem
-              key={item.id}
-              category={item}
-              selected={item.selected}
-              onPress={this.handleSelectCategory}
-            />))}
-        </ScrollView>
+        {this.props.loading
+          ? <ActivityIndicator size="small" />
+          : this.renderCategories()}
       </View>
     );
   }
