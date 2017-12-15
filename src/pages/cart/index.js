@@ -6,7 +6,7 @@ import {
   Text,
 } from 'react-native';
 
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 /* Components */
 import CartList from 'components/CartList';

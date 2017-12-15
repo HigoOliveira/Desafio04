@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     padding: metrics.padding,
     marginTop: metrics.marginTopPage,
     marginHorizontal: metrics.marginHorizontalPage,
-    borderRadius: metrics.radius,
   },
   containerContent: {
     flexDirection: 'row',
