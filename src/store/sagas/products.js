@@ -24,6 +24,6 @@ export function* getProductByCategory(action) {
     yield put(ActionCreators.productsSuccess(response.data.products));
     yield put(ActionCreatorsCategory.categoryAddProducts(action.category, response.data.products));
   } else {
-    yield put(ActionCreators.produtcsFailure());
+    yield put(ActionCreators.productsFailure());
   }
 }

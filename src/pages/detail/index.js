@@ -6,9 +6,10 @@ import PropTypes from 'prop-types';
 /* Redux */
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
+import DetailActions from 'store/ducks/detail';
 
 /* Components */
-import ProductItem from 'components/ProductList/components/ProductItem';
+import { ProductItem } from 'components/ProductList/components/ProductItem';
 import Header from 'components/Header';
 
 /* Presentational */
@@ -18,6 +19,7 @@ import {
   Image,
   TouchableOpacity,
   BackHandler,
+  ActivityIndicator,
 } from 'react-native';
 import styles from './styles';
 
@@ -26,57 +28,72 @@ class Detail extends Component {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
         params: PropTypes.shape({
-          product: PropTypes.shape(ProductItem.propTypes.product),
+          product: ProductItem.propTypes.product,
         }),
       }),
     }).isRequired,
-    dispatch: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
+    detailRequest: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+    BackHandler.addEventListener('hardwareBackPress', this.props.goBack);
+    const { product } = this.props.navigation.state.params;
+    this.props.detailRequest(product);
   }
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+    BackHandler.removeEventListener('hardwareBackPress', this.props.goBack);
   }
 
-  onBackPress = () => {
-    const { dispatch } = this.props;
-    dispatch(NavigationActions.back());
-    return true;
+  renderProduct() {
+    const { product } = this.props;
+    return (
+      <View style={styles.containerMain}>
+        <Image
+          source={{
+            uri: product.image,
+          }}
+          style={
+            styles.image
+          }
+        />
+        <View style={styles.containerContent}>
+          <View style={styles.containerInfo}>
+            <Text style={styles.name}>{product.name}</Text>
+            <Text style={styles.brand}>{product.brand}</Text>
+          </View>
+          <Text style={styles.price}>{product.price}</Text>
+        </View>
+        <TouchableOpacity
+          onPress={() => {}}
+          style={styles.button}
+        >
+          <Text style={styles.text}>Adicionar ao carrinho</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 
   render() {
-    const { product } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         <Header title="Detalhe do produto" backEnabled />
-        <View style={styles.containerMain}>
-          <Image
-            source={{
-              uri: product.image,
-            }}
-            style={
-              styles.image
-            }
-          />
-          <View style={styles.containerContent}>
-            <View style={styles.containerInfo}>
-              <Text style={styles.name}>{product.name}</Text>
-              <Text style={styles.brand}>{product.brand}</Text>
-            </View>
-            <Text style={styles.price}>{product.price}</Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={styles.button}
-          >
-            <Text style={styles.text}>Adicionar ao carrinho</Text>
-          </TouchableOpacity>
-        </View>
+        {this.props.loading
+          ? <ActivityIndicator size="large" />
+          : this.renderProduct()}
       </View>
     );
   }
 }
 
-export default connect()(Detail);
+const mapStateToProps = state => ({
+  product: state.detail.data,
+  loading: state.detail.loading,
+});
+
+const mapDispatchToProps = dispatch => ({
+  detailRequest: product => dispatch(DetailActions.detailRequest(product)),
+  goBack: () => dispatch(NavigationActions.back()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Detail);

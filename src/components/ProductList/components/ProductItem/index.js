@@ -9,13 +9,13 @@ import { NavigationActions } from 'react-navigation';
 
 import styles from './styles';
 
-class ProductItem extends Component {
+export class ProductItem extends Component {
   static propTypes = {
     product: PropTypes.shape({
       id: PropTypes.number,
-      image: PropTypes.string,
       name: PropTypes.string,
       brand: PropTypes.string,
+      image: PropTypes.string,
       price: PropTypes.number,
     }).isRequired,
     dispatch: PropTypes.func.isRequired,

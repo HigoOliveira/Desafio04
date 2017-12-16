@@ -7,7 +7,7 @@ import { ScrollView, ActivityIndicator } from 'react-native';
 import styles from './styles';
 
 /* Components */
-import ProductItem from './components/ProductItem';
+import ProductItemComponent, { ProductItem } from './components/ProductItem';
 
 export default class List extends Component {
   static propTypes = {
@@ -20,7 +20,7 @@ export default class List extends Component {
   }
 
   renderProducts() {
-    return this.props.products.map(item => <ProductItem key={item.id} product={item} />);
+    return this.props.products.map(item => <ProductItemComponent key={item.id} product={item} />);
   }
 
   render() {
