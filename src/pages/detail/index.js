@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import DetailActions from 'store/ducks/detail';
+import CartActions from 'store/ducks/cart';
 
 /* Components */
 import { ProductItem } from 'components/ProductList/components/ProductItem';
@@ -65,7 +66,7 @@ class Detail extends Component {
           <Text style={styles.price}>{product.price}</Text>
         </View>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => { this.props.cartAddProduct(this.props.product); }}
           style={styles.button}
         >
           <Text style={styles.text}>Adicionar ao carrinho</Text>
@@ -93,6 +94,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   detailRequest: product => dispatch(DetailActions.detailRequest(product)),
+  cartAddProduct: product => dispatch(CartActions.cartAddProduct(product)),
   goBack: () => dispatch(NavigationActions.back()),
 });
 

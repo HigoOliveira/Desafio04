@@ -17,7 +17,7 @@ export function* getProduct(action) {
   }
 }
 export function* getProductByCategory(action) {
-  yield call(sleep, 1000);
+  // yield call(sleep, 1000);
   const response = yield call(api.get, `/category_products/${action.category.id}`);
 
   if (response.ok) {
