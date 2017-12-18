@@ -11,6 +11,7 @@ import CartActions from 'store/ducks/cart';
 
 /* Components */
 import { ProductItem } from 'components/ProductList/components/ProductItem';
+import CategoryItem from 'components/CategoryList/components/CategoryItem';
 import Header from 'components/Header';
 
 /* Presentational */
@@ -35,6 +36,10 @@ class Detail extends Component {
     }).isRequired,
     goBack: PropTypes.func.isRequired,
     detailRequest: PropTypes.func.isRequired,
+    cartAddProduct: PropTypes.func.isRequired,
+    product: ProductItem.propTypes.product,
+    category: CategoryItem.propTypes.category,
+    loading: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -48,7 +53,6 @@ class Detail extends Component {
 
   renderProduct() {
     const { product, category } = this.props;
-    console.tron.log(category);
     return (
       <View style={styles.containerMain}>
         <Image

@@ -1,7 +1,11 @@
+/* Core */
 import React from 'react';
 import PropTypes from 'prop-types';
+
+/* Redux */
 import { addNavigationHelpers } from 'react-navigation';
 import { connect } from 'react-redux';
+
 import Routes from './routes';
 
 const Navigator = ({ dispatch, nav }) => (

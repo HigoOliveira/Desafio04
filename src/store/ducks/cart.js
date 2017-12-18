@@ -4,7 +4,7 @@ import { createReducer, createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions({
   cartAddProduct: ['category', 'product'],
-  cartRemoveProduct: ['category', 'product'],
+  cartRemoveProduct: ['item'],
 });
 
 export { Types };
@@ -27,7 +27,11 @@ export const add = (state, action) => {
 };
 
 export const remove = (state, action) => (
-  state.filter(item => item.product.id !== action.product.id)
+  state.filter(item => {
+    console.tron.log(item);
+    console.tron.log(action.item.id)
+    return item.id !== action.item.id
+  })
 );
 
 /* Reducers to types */
