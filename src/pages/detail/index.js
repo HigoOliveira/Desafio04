@@ -47,7 +47,8 @@ class Detail extends Component {
   }
 
   renderProduct() {
-    const { product } = this.props;
+    const { product, category } = this.props;
+    console.tron.log(category);
     return (
       <View style={styles.containerMain}>
         <Image
@@ -66,7 +67,7 @@ class Detail extends Component {
           <Text style={styles.price}>{product.price}</Text>
         </View>
         <TouchableOpacity
-          onPress={() => { this.props.cartAddProduct(this.props.product); }}
+          onPress={() => { this.props.cartAddProduct(category, product); }}
           style={styles.button}
         >
           <Text style={styles.text}>Adicionar ao carrinho</Text>
@@ -88,13 +89,14 @@ class Detail extends Component {
 }
 
 const mapStateToProps = state => ({
-  product: state.detail.data,
+  product: state.detail.product,
+  category: state.detail.category,
   loading: state.detail.loading,
 });
 
 const mapDispatchToProps = dispatch => ({
   detailRequest: product => dispatch(DetailActions.detailRequest(product)),
-  cartAddProduct: product => dispatch(CartActions.cartAddProduct(product)),
+  cartAddProduct: (category, product) => dispatch(CartActions.cartAddProduct(category, product)),
   goBack: () => dispatch(NavigationActions.back()),
 });
 

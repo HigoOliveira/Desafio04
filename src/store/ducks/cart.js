@@ -3,8 +3,8 @@ import { createReducer, createActions } from 'reduxsauce';
 /* Types & Action Creators */
 
 const { Types, Creators } = createActions({
-  cartAddProduct: ['product'],
-  cartRemoveProduct: ['product'],
+  cartAddProduct: ['category', 'product'],
+  cartRemoveProduct: ['category', 'product'],
 });
 
 export { Types };
@@ -15,14 +15,15 @@ export default Creators;
 export const INITIAL_STATE = [];
 
 export const add = (state, action) => {
-  const exist = state.filter(item => item.product.id === action.product.id)[0];
+  const id = `${action.category.id}-${action.product.id}`;
+  const exist = state.filter(item => item.id === id)[0];
   if (exist) {
     return state.map(item =>
-      (item.product.id === action.product.id
+      (item.id === id
         ? { ...item, quantity: item.quantity + 1 }
         : item));
   }
-  return [...state, { product: action.product, quantity: 1 }];
+  return [...state, { id, product: action.product, quantity: 1 }];
 };
 
 export const remove = (state, action) => (

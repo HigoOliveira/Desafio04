@@ -4,7 +4,7 @@ import { createReducer, createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions({
   detailRequest: ['product'],
-  detailSuccess: ['data'],
+  detailSuccess: ['category', 'product'],
   detailFailure: null,
 });
 
@@ -14,7 +14,8 @@ export default Creators;
 /* Initial State */
 
 export const INITIAL_STATE = {
-  data: {},
+  product: {},
+  category: {},
   loading: false,
   error: false,
 };
@@ -22,7 +23,8 @@ export const INITIAL_STATE = {
 export const request = state => ({ ...state, loading: true });
 
 export const success = (state, action) => ({
-  data: action.data,
+  product: action.product,
+  category: action.category,
   loading: false,
   error: false,
 });
