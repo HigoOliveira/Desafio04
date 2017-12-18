@@ -5,6 +5,7 @@ import { createReducer, createActions } from 'reduxsauce';
 const { Types, Creators } = createActions({
   cartAddProduct: ['category', 'product'],
   cartRemoveProduct: ['item'],
+  cartUpdateProduct: ['item', 'quantity'],
 });
 
 export { Types };
@@ -27,11 +28,12 @@ export const add = (state, action) => {
 };
 
 export const remove = (state, action) => (
-  state.filter(item => {
-    console.tron.log(item);
-    console.tron.log(action.item.id)
-    return item.id !== action.item.id
-  })
+  state.filter(item => item.id !== action.item.id)
+);
+
+export const update = (state, action) => (
+  state.map(item =>
+    (item.id === action.item.id ? { ...item, quantity: action.quantity } : item))
 );
 
 /* Reducers to types */
@@ -39,4 +41,5 @@ export const remove = (state, action) => (
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CART_ADD_PRODUCT]: add,
   [Types.CART_REMOVE_PRODUCT]: remove,
+  [Types.CART_UPDATE_PRODUCT]: update,
 });

@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
     marginBottom: metrics.margin,
   },
   containerMain: {
-
+    alignSelf: 'stretch',
+    flexGrow: 2,
   },
   name: {
     fontSize: fonts.regular,
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
     height: 20,
     paddingVertical: 0,
     paddingHorizontal: metrics.padding,
+    marginHorizontal: metrics.margin,
     color: colors.grey,
   },
 });

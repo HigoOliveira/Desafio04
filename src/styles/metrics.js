@@ -9,7 +9,7 @@ export default {
   marginHorizontalPage: 20,
   marginCategory: 20,
   image: 180,
-  radius: 5,
+  radius: 2,
   statusBarHeight: (Platform.OS === 'ios') ? 20 : 0,
   navBarHeight: 54,
   paddingNavBar: 20,
