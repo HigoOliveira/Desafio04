@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.primary,
     height: 44,
-    borderRadius: 22,
+    borderRadius: metrics.radius,
     paddingHorizontal: metrics.paddingHorizontalPage,
     flexDirection: 'row',
     alignItems: 'center',
