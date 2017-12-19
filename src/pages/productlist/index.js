@@ -66,6 +66,7 @@ export class ProductList extends Component {
       </View>
     );
   }
+
   render() {
     const { category, products } = this.props;
     return (

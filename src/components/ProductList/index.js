@@ -27,7 +27,11 @@ export default class List extends Component {
     return (
       <ScrollView
         style={styles.container}
-        contentContainerStyle={styles.contentContainer}
+        contentContainerStyle={
+          [styles.contentContainer,
+            this.props.loading ? styles.contentContainerLoading : null,
+          ]
+        }
       >
         {this.props.loading
           ? <ActivityIndicator size="large" />

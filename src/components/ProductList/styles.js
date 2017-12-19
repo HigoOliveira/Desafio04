@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  contentContainerLoading: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default styles;
