@@ -37,8 +37,14 @@ class Detail extends Component {
     goBack: PropTypes.func.isRequired,
     detailRequest: PropTypes.func.isRequired,
     cartAddProduct: PropTypes.func.isRequired,
-    product: ProductItem.propTypes.product,
-    category: CategoryItem.propTypes.category,
+    product: PropTypes.oneOfType([
+      ProductItem.propTypes.product,
+      PropTypes.object,
+    ]).isRequired,
+    category: PropTypes.oneOfType([
+      CategoryItem.propTypes.category,
+      PropTypes.object,
+    ]).isRequired,
     loading: PropTypes.bool.isRequired,
   };
 
