@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 /* Presentational */
-import { ScrollView, ActivityIndicator } from 'react-native';
+import { ScrollView, ActivityIndicator, RefreshControl } from 'react-native';
 import styles from './styles';
 
 /* Components */
@@ -13,10 +13,13 @@ export default class List extends Component {
   static propTypes = {
     products: PropTypes.arrayOf(ProductItem.propTypes.product),
     loading: PropTypes.bool,
+    refreshing: PropTypes.bool,
+    productsRefresh: PropTypes.func.isRequired,
   }
   static defaultProps = {
     products: [],
     loading: false,
+    refreshing: false,
   }
 
   renderProducts() {
@@ -27,6 +30,12 @@ export default class List extends Component {
     return (
       <ScrollView
         style={styles.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.props.refreshing}
+            onRefresh={this.props.productsRefresh}
+          />
+        }
         contentContainerStyle={
           [styles.contentContainer,
             this.props.loading ? styles.contentContainerLoading : null,

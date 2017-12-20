@@ -4,6 +4,7 @@ import { createReducer, createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions({
   productsRequest: ['category'],
+  productsRefresh: ['category'],
   productsSuccess: ['data'],
   productsFailure: null,
 });
@@ -16,15 +17,16 @@ export default Creators;
 export const INITIAL_STATE = {
   data: [],
   loading: false,
+  refreshing: false,
   error: false,
 };
 
 export const request = state => ({ ...state, loading: true });
+export const refresh = state => ({ ...state, refreshing: true });
 
 export const success = (state, action) => ({
+  ...INITIAL_STATE,
   data: action.data,
-  loading: false,
-  error: false,
 });
 
 export const failure = () => ({
@@ -36,6 +38,7 @@ export const failure = () => ({
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.PRODUCTS_REQUEST]: request,
+  [Types.PRODUCTS_REFRESH]: refresh,
   [Types.PRODUCTS_SUCCESS]: success,
   [Types.PRODUCTS_FAILURE]: failure,
 });

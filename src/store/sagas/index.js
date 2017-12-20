@@ -14,6 +14,7 @@ export default function* root() {
   yield all([
     takeLatest(CategoryTypes.CATEGORY_REQUEST, getCategories),
     takeLatest(ProductsTypes.PRODUCTS_REQUEST, getProductByCategory),
+    takeLatest(ProductsTypes.PRODUCTS_REFRESH, getProductByCategory),
     takeLatest(CategoryTypes.CATEGORY_SELECT, getProduct),
     takeLatest(DetailTypes.DETAIL_REQUEST, getDetail),
   ]);

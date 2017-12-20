@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 /* Redux */
 import { connect } from 'react-redux';
 import CategoryActions from 'store/ducks/category';
+import ProductsActions from 'store/ducks/products';
 
 /* Components */
 import List from 'components/ProductList';
@@ -33,9 +34,11 @@ export class ProductList extends Component {
     products: PropTypes.shape({
       data: PropTypes.arrayOf(ProductItem.propTypes.product),
       loading: PropTypes.bool,
+      refreshing: PropTypes.bool,
       error: PropTypes.bool,
     }).isRequired,
     categoryRequest: PropTypes.func.isRequired,
+    productsRefresh: PropTypes.func.isRequired,
   }
   componentDidMount() {
     this.props.categoryRequest();
@@ -84,6 +87,8 @@ export class ProductList extends Component {
             <List
               products={products.data}
               loading={products.loading}
+              refreshing={products.refreshing}
+              productsRefresh={() => { this.props.productsRefresh(category.selected); }}
             />
           </View>)
         }
@@ -99,6 +104,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   categoryRequest: () => dispatch(CategoryActions.categoryRequest()),
+  productsRefresh: category => dispatch(ProductsActions.productsRefresh(category)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductList);
