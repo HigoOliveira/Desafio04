@@ -46,7 +46,7 @@ export class ProductItem extends Component {
         />
         <Text style={styles.name}>{product.name}</Text>
         <Text style={styles.brand}>{product.brand}</Text>
-        <Text style={styles.price}>{product.price}</Text>
+        <Text style={styles.price}>R${product.price.toFixed(2)}</Text>
       </TouchableOpacity>
     );
   }

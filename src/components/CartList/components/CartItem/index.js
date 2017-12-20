@@ -54,7 +54,7 @@ export class CartItem extends Component {
         this.setState({ text: `${this.props.cart.quantity}` });
       });
     } else {
-      this.props.cartUpdateProduct(this.props.cart, parseInt(text, 10));
+      this.props.cartUpdateProduct(this.props.cart, parseFloat(text, 10));
     }
   }
 

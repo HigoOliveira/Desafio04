@@ -42,7 +42,7 @@ const Routes = TabNavigator({
     style: {
       backgroundColor: colors.white,
       borderTopWidth: 1,
-      borderColor: colors.grey,
+      borderColor: colors.light,
     },
   },
 });

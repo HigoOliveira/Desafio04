@@ -74,7 +74,7 @@ class Detail extends Component {
             <Text style={styles.name}>{product.name}</Text>
             <Text style={styles.brand}>{product.brand}</Text>
           </View>
-          <Text style={styles.price}>{product.price}</Text>
+          <Text style={styles.price}>R${parseFloat(product.price).toFixed(2)}</Text>
         </View>
         <TouchableOpacity
           onPress={() => { this.props.cartAddProduct(category, product); }}

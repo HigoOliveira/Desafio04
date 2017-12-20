@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: metrics.margin,
   },
+  containerInfo: {
+    flex: 1,
+  },
   name: {
     fontSize: fonts.bigger,
     fontWeight: 'bold',

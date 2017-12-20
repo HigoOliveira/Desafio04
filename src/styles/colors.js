@@ -6,6 +6,7 @@ export default {
 
   grey: '#C0C0C0',
   background: '#F5F5F5',
+  light: '#F2F2F2',
   white: '#FFFFFF',
 
   transparent: 'transparent',
