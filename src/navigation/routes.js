@@ -1,16 +1,18 @@
+/* Core */
 import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 
-import { colors } from 'styles';
-
-import ProductList from 'pages/productlist';
+/* Components */
+import ProductListComponent from 'pages/productlist';
 import Detail from 'pages/detail';
 import Cart from 'pages/cart';
 
+/* Presentational */
+import { colors } from 'styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const ProductListRoutes = StackNavigator({
-  ProductList: { screen: ProductList },
+  ProductListComponent: { screen: ProductListComponent },
   Detail: { screen: Detail },
 }, {
   headerMode: 'none',
@@ -23,10 +25,10 @@ const ProductListRoutes = StackNavigator({
 
 
 const Routes = TabNavigator({
-  ProductList: { screen: ProductListRoutes },
+  ProductListComponent: { screen: ProductListRoutes },
   Cart: { screen: Cart },
 }, {
-  initialRouteName: 'ProductList',
+  initialRouteName: 'ProductListComponent',
   swipeEnabled: false,
   animationEnabled: false,
   lazy: true,

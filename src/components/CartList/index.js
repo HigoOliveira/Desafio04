@@ -1,5 +1,6 @@
 /* Core */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /* Redux */
 import { connect } from 'react-redux';
@@ -9,14 +10,16 @@ import { ScrollView, Text } from 'react-native';
 import styles from './styles';
 
 /* Components */
-import CartItem from './components/CartItem';
+import CartItemComponent, { CartItem } from './components/CartItem';
 
 class CartList extends Component {
-
-  renderEmptyCart() {
+  static propTypes = {
+    cart: PropTypes.arrayOf(CartItem.propTypes.cart).isRequired,
+  };
+  static renderEmptyCart() {
     return (
       <Text>Você não possue nenhum item no seu carrinho de compras!</Text>
-    )
+    );
   }
 
   render() {
@@ -26,8 +29,8 @@ class CartList extends Component {
         contentContainerStyle={styles.contentContainer}
       >
         {this.props.cart.length === 0
-          ? this.renderEmptyCart()
-          : this.props.cart.map(cart => <CartItem key={cart.product.id} cart={cart} />)}
+          ? CartList.renderEmptyCart()
+          : this.props.cart.map(cart => <CartItemComponent key={cart.product.id} cart={cart} />)}
       </ScrollView>
     );
   }

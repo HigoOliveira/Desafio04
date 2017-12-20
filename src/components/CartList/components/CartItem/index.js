@@ -21,7 +21,17 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 
-class CartItem extends Component {
+export class CartItem extends Component {
+  static propTypes = {
+    cart: PropTypes.shape({
+      id: PropTypes.string,
+      product: ProductItem.propTypes.product,
+      quantity: PropTypes.number,
+    }).isRequired,
+    cartRemoveProduct: PropTypes.func.isRequired,
+    cartUpdateProduct: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -40,6 +50,8 @@ class CartItem extends Component {
     if (text === '0') {
       Alert.confirm('Se você escolheu \'0\' como quantidade, seu produto será excluido do carrinho!', () => {
         this.props.cartRemoveProduct(this.props.cart);
+      }, () => {
+        this.setState({ text: `${this.props.cart.quantity}` });
       });
     } else {
       this.props.cartUpdateProduct(this.props.cart, parseInt(text, 10));
@@ -76,16 +88,6 @@ class CartItem extends Component {
     );
   }
 }
-
-CartItem.propTypes = {
-  cart: PropTypes.shape({
-    id: PropTypes.string,
-    product: ProductItem.propTypes.product,
-    quantity: PropTypes.number,
-  }).isRequired,
-  cartRemoveProduct: PropTypes.func.isRequired,
-  cartUpdateProduct: PropTypes.func.isRequired,
-};
 
 const mapDispatchToProps = dispatch => ({
   cartRemoveProduct: item =>

@@ -1,12 +1,13 @@
+/* Core */
 import React, { Component } from 'react';
-import { Image, Text, TouchableOpacity } from 'react-native';
-
 import PropTypes from 'prop-types';
 
 /* Redux */
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
+/* Presentational */
+import { Image, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
 export class ProductItem extends Component {

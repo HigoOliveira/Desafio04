@@ -9,12 +9,12 @@ const alert = text => Alert.alert(
   { cancelable: false },
 );
 
-const confirm = (text, onConfirm = () => {}) => Alert.alert(
+const confirm = (text, onConfirm = () => {}, onCancel = () => {}) => Alert.alert(
   'GoCommerce',
   text,
   [
     { text: 'Ok', onPress: onConfirm },
-    { text: 'Cancelar', style: 'cancel' },
+    { text: 'Cancelar', style: 'cancel', onPress: onCancel },
   ],
   { cancelable: false },
 );
