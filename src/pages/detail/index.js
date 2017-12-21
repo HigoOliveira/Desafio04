@@ -11,15 +11,13 @@ import CartActions from 'store/ducks/cart';
 
 /* Components */
 import { ProductItem } from 'components/ProductList/components/ProductItem';
-import CategoryItem from 'components/CategoryList/components/CategoryItem';
 import Header from 'components/Header';
+import Product from 'pages/detail/components/Product';
+import ErrorPanel from 'components/ErrorPanel';
 
 /* Presentational */
 import {
   View,
-  Text,
-  Image,
-  TouchableOpacity,
   BackHandler,
   ActivityIndicator,
 } from 'react-native';
@@ -36,15 +34,7 @@ class Detail extends Component {
     }).isRequired,
     goBack: PropTypes.func.isRequired,
     detailRequest: PropTypes.func.isRequired,
-    cartAddProduct: PropTypes.func.isRequired,
-    product: PropTypes.oneOfType([
-      ProductItem.propTypes.product,
-      PropTypes.object,
-    ]).isRequired,
-    category: PropTypes.oneOfType([
-      CategoryItem.propTypes.category,
-      PropTypes.object,
-    ]).isRequired,
+    ...Product.propTypes,
     loading: PropTypes.bool.isRequired,
   };
 
@@ -57,33 +47,26 @@ class Detail extends Component {
     BackHandler.removeEventListener('hardwareBackPress', this.props.goBack);
   }
 
-  renderProduct() {
-    const { product, category } = this.props;
+  renderError() {
+    const { product } = this.props.navigation.state.params;
     return (
-      <View style={styles.containerMain}>
-        <Image
-          source={{
-            uri: product.image,
-          }}
-          style={
-            styles.image
-          }
+      <ErrorPanel
+        text="Houve um problema ao carregar o produto, tente mais tarde!"
+        loading={this.props.loading}
+        action={() => { this.props.detailRequest(product); }}
+      />);
+  }
+
+  renderProduct() {
+    return !this.props.error
+      ? (
+        <Product
+          product={this.props.product}
+          category={this.props.category}
+          cartAddProduct={this.props.cartAddProduct}
         />
-        <View style={styles.containerContent}>
-          <View style={styles.containerInfo}>
-            <Text style={styles.name}>{product.name}</Text>
-            <Text style={styles.brand}>{product.brand}</Text>
-          </View>
-          <Text style={styles.price}>R${parseFloat(product.price).toFixed(2)}</Text>
-        </View>
-        <TouchableOpacity
-          onPress={() => { this.props.cartAddProduct(category, product); }}
-          style={styles.button}
-        >
-          <Text style={styles.text}>Adicionar ao carrinho</Text>
-        </TouchableOpacity>
-      </View>
-    );
+      )
+      : this.renderError();
   }
 
   render() {
@@ -102,6 +85,8 @@ const mapStateToProps = state => ({
   product: state.detail.product,
   category: state.detail.category,
   loading: state.detail.loading,
+  error: state.detail.error,
+  message: state.detail.message,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -3,6 +3,7 @@ import { colors, metrics, fonts } from 'styles';
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: metrics.padding,
     backgroundColor: colors.white,
     borderRadius: metrics.radius,
@@ -14,6 +15,7 @@ const styles = StyleSheet.create({
   containerMain: {
     alignSelf: 'stretch',
     flexGrow: 2,
+    flex: 1,
   },
   name: {
     fontSize: fonts.regular,

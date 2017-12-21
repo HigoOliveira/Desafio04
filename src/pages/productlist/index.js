@@ -14,6 +14,7 @@ import CategoryList from 'components/CategoryList';
 import CategoryItem from 'components/CategoryList/components/CategoryItem';
 import { ProductItem } from 'components/ProductList/components/ProductItem';
 import Header from 'components/Header';
+import ErrorPanel from 'components/ErrorPanel';
 
 /* Presentational */
 import {
@@ -46,28 +47,11 @@ export class ProductList extends Component {
 
   renderError() {
     return (
-      <View style={styles.containerError}>
-        <Text style={styles.textError}>
-          Houve uma falha ao carregar os produtos, tente mais tarde!
-        </Text>
-        <TouchableOpacity
-          onPress={() => { this.props.categoryRequest(); }}
-          style={styles.button}
-        >
-          { this.props.category.loading
-            ? (
-              <ActivityIndicator
-                size="small"
-                color="#fff"
-                style={styles.indicator}
-              />
-            )
-            : null
-          }
-          <Text style={styles.buttonText}>Recarregar</Text>
-        </TouchableOpacity>
-      </View>
-    );
+      <ErrorPanel
+        text="Houve uma falha ao carregar os produtos, tente mais tarde!"
+        loading={this.props.category.loading}
+        action={() => { this.props.categoryRequest(); }}
+      />);
   }
 
   render() {
@@ -75,7 +59,7 @@ export class ProductList extends Component {
     return (
       <View style={styles.container}>
         <Header title="GoCommerce" />
-        { category.error
+        { (category.error || products.error)
           ? this.renderError()
         : (
           <View style={styles.container}>
