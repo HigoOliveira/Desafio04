@@ -19,9 +19,6 @@ import ErrorPanel from 'components/ErrorPanel';
 /* Presentational */
 import {
   View,
-  Text,
-  TouchableOpacity,
-  ActivityIndicator,
 } from 'react-native';
 import styles from './styles';
 
