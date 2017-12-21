@@ -13,6 +13,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import Alert from 'components/Alert';
 import styles from './styles';
 
 const Product = ({ category, product, cartAddProduct }) => (
@@ -33,7 +34,7 @@ const Product = ({ category, product, cartAddProduct }) => (
       <Text style={styles.price}>R${parseFloat(product.price).toFixed(2)}</Text>
     </View>
     <TouchableOpacity
-      onPress={() => { cartAddProduct(category, product); }}
+      onPress={() => { cartAddProduct(category, product); Alert.alert('Produto adicionado ao carrinho!'); }}
       style={styles.button}
     >
       <Text style={styles.text}>Adicionar ao carrinho</Text>
